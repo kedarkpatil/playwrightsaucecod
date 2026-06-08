@@ -341,27 +341,136 @@ MCP-compatible tooling was explored for AI-assisted software development workflo
 6. Complete order
 7. Verify order confirmation
 ```
+## API Testing
 
+This framework includes API testing capabilities using Playwright's built-in `APIRequestContext`. API tests validate backend endpoints independently of the UI and ensure reliable verification of request and response data.
+
+### Features
+
+- GET request validation
+- Response status code verification
+- Response body validation
+- API endpoint testing
+- JSON response assertions
+
+### Example API Test Coverage
+
+- Verify successful API responses (`200 OK`)
+- Validate response payload structure
+- Verify response data values
+- Handle API error scenarios
+- Test backend service availability
+
+---
+
+## API Mocking
+
+Playwright's network interception capabilities are used to mock API responses during UI testing. This enables testing frontend behavior without relying on live backend services.
+
+### Benefits of API Mocking
+
+- Faster test execution
+- Stable and predictable test data
+- Reduced dependency on external services
+- Easy simulation of edge cases and error responses
+
+### Mocking Capabilities
+
+- Mock GET requests
+- Modify API responses
+- Simulate server errors
+
+### Example Use Cases
+
+- Mock product inventory data
+- Simulate empty API responses
+- Test error handling scenarios
+- Validate UI behavior with custom test data
+
+### Sample Commands
+
+```bash
+# Run API tests
+npx playwright test tests/api
+
+# Run all tests
+npx playwright test
+```
+## Visual Testing
+
+### First Run
+
+Playwright creates a baseline image for future comparisons:
+
+```bash
+npx playwright test tests/visual/visual.spec.ts --update-snapshots
+```
+
+### Generated Folder Structure
+
+```text
+tests
+│
+└── visual
+    ├── visual.spec.ts
+    └── visual.spec.ts-snapshots
+        └── inventory-page-chromium-win32.png
+```
+
+### Future Runs
+
+Execute the test suite normally:
+
+```bash
+npx playwright test
+```
+
+Playwright automatically compares the current screenshot against the baseline snapshot.
+
+### Failed Comparison Example
+
+If the UI changes unexpectedly, Playwright reports a visual regression:
+
+```text
+Error: Screenshot comparison failed
+
+Expected: inventory-page-chromium-win32.png
+Received: inventory-page-actual.png
+Diff: inventory-page-diff.png
+```
+
+### Updating Snapshots
+
+If the UI change is intentional, update the baseline snapshots:
+
+```bash
+npx playwright test --update-snapshots
+```
 
 
 ## Future Enhancements
 
-- API Testing Integration
 - Playwright MCP Server Integration
 - Visual Regression Testing
-- Docker Execution
+- Docker and Kubernetes Execution
 - Parallel Test Execution
-- Cross-Browser Grid Execution
 - Advanced AI-Assisted Test Generation
 
 ## Author
 
-Automation Framework created by * **Kedar Patil** - *Initial work & framework design* - [GitHub Profile](https://[github.com](https://github.com/kedarkpatil/playwrightsaucecod) using:
+## Automation Framework
 
-* Playwright
-* TypeScript
-* Page Object Model (POM)
-* GitHub Actions
+Created by **Kedar Patil**
+
+- *Initial work & framework design*
+- GitHub Profile: [Kedar Patil](https://github.com/kedarkpatil/playwrightsaucecod)
+
+### Technologies Used
+
+- Playwright
+- TypeScript
+- Page Object Model (POM)
+- GitHub Actions
 
 
 
