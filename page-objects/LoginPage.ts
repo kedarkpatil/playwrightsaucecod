@@ -26,7 +26,7 @@ export class LoginPage {
         await this.passwordInput.fill(password);
         await this.loginButton.click();
     }
-
+    //Regular expression to match url containing 'inventory' to verify successful login
     async verifySuccessfulLogin() {
         await expect(this.page).toHaveURL(/inventory/);
     }
