@@ -15,10 +15,27 @@ jobs:
         node-version: lts/*
     - name: Install dependencies
       run: npm ci
+    #   # 1. AZURE LOGIN STEP  #As i dont have paid access to azure so commented it
+    # # This authenticates your GitHub runner with your Azure subscription
+    # - name: Azure Login
+    #   uses: azure/login@v2
+    #   with:
+    #     creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
+    #   # 3. AZURE DEVOPS INTEGRATION: Publish Test Results
+    # # This step uploads the JUnit results so they appear in your Azure Pipeline runs
+    # - name: Publish Test Results to Azure DevOps
+    #   if: ${{ !cancelled() }}
+    #   uses: ActionsDesk/publish-azure-devops-test-results@v1
+    #   with:
+    #     azure-devops-organization: 'your-org-name'
+    #     azure-devops-project: 'your-project-name'
+    #     azure-devops-personal-access-token: ${{ secrets.AZURE_DEVOPS_PAT }}
+    #     test-results-files: 'results.xml'
+    #     test-run-title: 'Playwright E2E Tests'
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
